@@ -2,11 +2,11 @@ import { booksCount, copiesCount, availableCopiesCount, authorsCount, genresCoun
 
 export default async function Home() {
 
-  const booksCnt = await booksCount();
-  const copiesCnt = await copiesCount();
-  const availableCopiesCnt = await availableCopiesCount();
-  const authorsCnt =  await authorsCount();
-  const genresCnt = await genresCount();
+  const booksCnt = -1 //await booksCount();
+  const copiesCnt = -1 // await copiesCount();
+  const availableCopiesCnt = -1 // await availableCopiesCount();
+  const authorsCnt = -1 // await authorsCount();
+  const genresCnt = -1 // await genresCount();
   
   return (
     <div className="grid justify-items-center">
