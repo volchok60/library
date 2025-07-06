@@ -1,4 +1,6 @@
-This is a React SPA project with Supabase integration 
+# Library
+
+React SPA app with Supabase integration 
 
 ## Getting Started
 
