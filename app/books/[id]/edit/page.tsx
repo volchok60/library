@@ -1,6 +1,6 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { getBook, getAuthors, getGenres } from "@/app/lib/utils"
+import { getBook, getAuthors, getGenres } from "@/app/lib/api"
 import Author from "@/app/components/author"
 import Genre from "@/app/components/genre"
 
@@ -21,11 +21,10 @@ export default async function UpdateBookForm({params}: {params: {id: number}}) {
       title: formData.get('title'),
       author_id: parseInt(formData.get('author_id') as string),
       genre_id: parseInt(formData.get('genre_id') as string),
-      summary: formData.get('summary'),
-      isbn: formData.get('isbn')
+      summary: formData.get('summary')
     }
 
-    const resp = await fetch(`${baseUrl}/api/books/${id}`, {
+    const resp = await fetch(`${baseUrl}/books/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -34,7 +33,7 @@ export default async function UpdateBookForm({params}: {params: {id: number}}) {
     })
 
     if (!resp.ok) {
-      console.log('status:', resp.status, 'statusText:', resp.statusText)
+      console.error('status:', resp.status, 'statusText:', resp.statusText)
       // This will activate the closest `error.js` Error Boundary
       throw new Error('Failed to update Book')
     }
@@ -58,9 +57,6 @@ export default async function UpdateBookForm({params}: {params: {id: number}}) {
 
           <label className='sm:text-end'>Summary:</label>
           <textarea name="summary" rows={10} cols={50} required defaultValue={book.summary} />
-          
-          <label className='sm:text-end'>ISBN:</label>
-          <input type="text" name="isbn" required defaultValue={book.isbn} />
         </div>
         <div className='text-center'>
           <button type="submit" className='rounded-md bg-cyan-500 text-white hover:bg-blue-500 m-2 px-2'>

@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { getGenre } from "../../lib/utils"
+import { getGenre } from "../../lib/api"
+import DeleteGenre from "@/app/components/deleteGenre";
 
 export default async function GenreDetails({params}: {params: {id: number;}}) {
   const id = params.id
@@ -15,6 +16,7 @@ export default async function GenreDetails({params}: {params: {id: number;}}) {
       </p>
       <div className='text-center'>
         <Link href={`/genres/${id}/edit`} className='rounded-md bg-cyan-500 text-white hover:bg-blue-500 m-2 px-2'>Edit</Link>
+        <DeleteGenre id={id} />
       </div>
     </>
   )

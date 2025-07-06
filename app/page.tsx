@@ -1,12 +1,12 @@
-import { booksCount, copiesCount, availableCopiesCount, authorsCount, genresCount } from "./lib/utils"
+import { booksCount, copiesCount, availableCopiesCount, authorsCount, genresCount } from "./lib/api"
 
 export default async function Home() {
 
-  const booksCnt = await booksCount()
-  const copiesCnt = await copiesCount()
-  const availableCopiesCnt = await availableCopiesCount()
-  const authorsCnt =  await authorsCount()
-  const genresCnt = await genresCount()
+  const booksCnt = await booksCount();
+  const copiesCnt = await copiesCount();
+  const availableCopiesCnt = await availableCopiesCount();
+  const authorsCnt =  await authorsCount();
+  const genresCnt = await genresCount();
   
   return (
     <div className="grid justify-items-center">

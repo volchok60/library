@@ -12,7 +12,7 @@ export default async function GenreForm() {
       name: formData.get('name')
     }
 
-    const resp = await fetch(`${baseUrl}/api/genres`, {
+    const resp = await fetch(`${baseUrl}/genres`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

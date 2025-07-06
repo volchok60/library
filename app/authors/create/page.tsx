@@ -13,16 +13,17 @@ export default async function AuthorForm() {
     const deathDate = str ? new Date(str) : null
 
     const payload = {
-      first_name: formData.get('first_name'),
-      family_name: formData.get('family_name'),
-      birth_date: birthDate,
-      death_date: deathDate,
-      life_span: formData.get('life_span')
+      firstName: formData.get('first_name'),
+      familyName: formData.get('family_name'),
+      birthDate: birthDate,
+      deathDate: deathDate,
+      lifeSpan: formData.get('life_span')
     }
     console.log('payload:', payload)
 
-    const resp = await fetch(`${baseUrl}/api/authors`, {
+    const resp = await fetch(`${baseUrl}/authors`, {
       method: "POST",
+      cache: 'no-cache',
       headers: {
         "Content-Type": "application/json"
       },
@@ -30,10 +31,11 @@ export default async function AuthorForm() {
     })
 
     if (!resp.ok) {
-      console.log('status:', resp.status, 'statusText:', resp.statusText)
+      console.error('status:', resp.status, 'statusText:', resp.statusText)
       throw new Error('Failed to create Author')
     }
-    const author = await resp.json()
+    const author = await resp.json();
+    console.log('author: ' + author);
 
     revalidatePath('/authors')
     redirect('/authors')

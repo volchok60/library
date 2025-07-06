@@ -1,16 +1,18 @@
-import Link from "next/link"
-import { getBookCopy, getBookCopyStatuses } from "@/app/lib/utils"
-import FormattedDate from '@/app/components/date'
+import Link from "next/link";
+import { getBookCopy,  } from "@/app/lib/api";
+import FormattedDate from '@/app/components/date';
+import { getBookCopyStatuses } from "@/app/lib/utils";
+import DeleteBookCopy from "@/app/components/deleteBookCopy";
 
 export default async function BookCopyDetails({params}: {params: {id: number;}}) {
   const id = params.id
   const bookCopy = await getBookCopy(id)
   console.log('bookCopy:', bookCopy)
 
-  const dueDate = bookCopy.due_date?.split('T')[0]
+  const dueDate = bookCopy.dueBack?.split('T')[0]
   const book = bookCopy.book
   const author = book.author
-  const statuses = getBookCopyStatuses()
+  const statuses = getBookCopyStatuses();
   
   return (
     <div className='text-center'>
@@ -21,7 +23,7 @@ export default async function BookCopyDetails({params}: {params: {id: number;}})
       </p>
       <p>
         <span>Author: </span>
-        {author.first_name}{' '}{author.family_name}
+        {author.firstName}{' '}{author.familyName}
       </p>
       <p>
         <span>Imprint: </span>
@@ -38,6 +40,7 @@ export default async function BookCopyDetails({params}: {params: {id: number;}})
         </p>
       }
       <Link href={`/copies/${id}/edit`} className='rounded-md bg-cyan-500 text-white hover:bg-blue-500 m-2 px-2'>Edit</Link>
+      <DeleteBookCopy id={id} />
     </div>
   )
 }

@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import LoginFlip from './loginFlip';
 
 export default function Header() {
+  
   return (
     <header>
       <nav className="flex flex-wrap items-center justify-between bg-teal-500 p-6">
@@ -32,9 +34,7 @@ export default function Header() {
               Book Copies
             </Link>
           </div>
-          <div>
-            <Link href="/login" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 sm:mt-0">Login</Link>
-          </div>
+          <LoginFlip />
         </div>
       </nav>
     </header>

@@ -1,6 +1,6 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { getGenre } from "@/app/lib/utils"
+import { getGenre } from "@/app/lib/api"
 
 export default async function UpdateGenreForm({params}: {params: {id: number;}}) {
   const id = params.id
@@ -15,7 +15,7 @@ export default async function UpdateGenreForm({params}: {params: {id: number;}})
       name: formData.get('name')
     }
 
-    const resp = await fetch(`${baseUrl}/api/genres/${id}`, {
+    const resp = await fetch(`${baseUrl}/genres/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"

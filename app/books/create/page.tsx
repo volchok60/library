@@ -1,6 +1,6 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { getAuthors, getGenres } from "@/app/lib/utils"
+import { getAuthors, getGenres } from "@/app/lib/api"
 import Author from "@/app/components/author"
 import Genre from "@/app/components/genre"
 
@@ -16,13 +16,12 @@ export default async function BookForm() {
 
     const payload = {
       title: formData.get('title'), 
-      author_id: parseInt(formData.get('author_id') as string),
-      genre_id: parseInt(formData.get('genre_id') as string),
-      summary: formData.get('summary'),
-      isbn: formData.get('isbn')
+      authorId: parseInt(formData.get('author_id') as string),
+      genreId: parseInt(formData.get('genre_id') as string),
+      summary: formData.get('summary')
     }
 
-    const resp = await fetch(`${baseUrl}/api/books`, {
+    const resp = await fetch(`${baseUrl}/books`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -31,7 +30,7 @@ export default async function BookForm() {
     })
 
     if (!resp.ok) {
-      console.log('status:', resp.status, 'statusText:', resp.statusText)
+      console.error('status:', resp.status, 'statusText:', resp.statusText)
       throw new Error('Failed to create Book')
     }
     const book = await resp.json()
@@ -56,8 +55,6 @@ export default async function BookForm() {
           <label className='sm:text-end'>Summary:</label>
           <textarea name="summary" rows={10} cols={50} required />
           
-          <label className='sm:text-end'>ISBN:</label>
-          <input type="text" name="isbn" required />
         </div>
         <div className='text-center'>
           <button type="submit" 

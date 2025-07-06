@@ -1,6 +1,6 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { getBooks, getBookCopy } from "@/app/lib/utils"
+import { getBooks, getBookCopy } from "@/app/lib/api"
 import Book from '@/app/components/book'
 import BookCopyStatus from '@/app/components/status'
 
@@ -9,7 +9,7 @@ export default async function UpdateBookCopyForm({params}: {params: {id: number;
   const bookCopy = await getBookCopy(id)
   console.log('bookCopy:', bookCopy)
 
-  const dueDate = bookCopy.due_date?.split('T')[0]
+  const dueDate = bookCopy.dueBack?.split('T')[0]
 
   const books = await getBooks()
 
@@ -22,14 +22,15 @@ export default async function UpdateBookCopyForm({params}: {params: {id: number;
     const dueDate = str ? new Date(str) : null
 
     const payload = {
-      book_id: parseInt(formData.get('book_id') as string),
+      bookId: parseInt(formData.get('book_id') as string),
       imprint: formData.get('imprint'),
-      due_date: dueDate,
-      status: parseInt(formData.get('status') as string)
+      dueBack: dueDate,
+      status: parseInt(formData.get('status') as string),
+      isbn: formData.get('isbn')
     }
     console.log('payload:', payload)
 
-    const resp = await fetch(`${baseUrl}/api/copies/${id}`, {
+    const resp = await fetch(`${baseUrl}/copies/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -38,7 +39,7 @@ export default async function UpdateBookCopyForm({params}: {params: {id: number;
     })
 
     if (!resp.ok) {
-      console.log('status:', resp.status, 'statusText:', resp.statusText)
+      console.error('status:', resp.status, 'statusText:', resp.statusText)
       throw new Error('Failed to update BookCopy')
     }
     const bookCopy = await resp.json()
@@ -59,6 +60,9 @@ export default async function UpdateBookCopyForm({params}: {params: {id: number;
           <input type="text" name="imprint" required defaultValue={bookCopy.imprint} />
 
           <BookCopyStatus selectedId={bookCopy.status} />
+
+          <label className='sm:text-end'>ISBN:</label>
+          <input type="text" name="isbn" required defaultValue={bookCopy.isbn} />
           
           <label className='sm:text-end'>Due Date:</label>
           <input type="date" name="due_date" defaultValue={dueDate} />

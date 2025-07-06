@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { getBook } from "@/app/lib/utils"
+import { getBook } from "@/app/lib/api"
+import DeleteBook from "@/app/components/deleteBook"
 
 export default async function BookDetails({params}: {params: {id: number}}) {
   const id = params.id
@@ -14,15 +15,14 @@ export default async function BookDetails({params}: {params: {id: number}}) {
           {book.title}
         </span>
         <span> by </span>
-        {author.first_name}{' '}{author.family_name}
+        {author.firstName}{' '}{author.familyName}
       </p>
       <p>
         {book.summary}
       </p>  
       <div className='text-center'>
-        <Link href={`/books/${id}/edit`} className='rounded-md bg-cyan-500 text-white hover:bg-blue-500 m-2 px-2'>
-          Edit
-        </Link>
+        <Link href={`/books/${id}/edit`} className='rounded-md bg-cyan-500 text-white hover:bg-blue-500 m-2 px-2'>Edit</Link>
+        <DeleteBook id={id} />
       </div>
     </>
   )

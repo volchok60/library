@@ -1,14 +1,14 @@
 'use client'
 
-import { useState } from 'react'
-import { getBookCopyStatuses } from '@/app/lib/utils'
+import { useState } from 'react';
+import { getBookCopyStatuses } from '../lib/utils';
 
 type BookCopyStatusProps = {
   selectedId?: number
 }
 
 export default function BookCopyStatus({selectedId}: BookCopyStatusProps) {
-  const statuses = getBookCopyStatuses()
+  const statuses = getBookCopyStatuses();
 
   const [statusId, setStatusId] = useState(selectedId)
 

@@ -1,6 +1,6 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { getBooks } from "@/app/lib/utils"
+import { getBooks } from "@/app/lib/api"
 import Book from '@/app/components/book'
 import BookCopyStatus from '@/app/components/status'
 
@@ -10,17 +10,20 @@ export default async function BookCopyForm() {
   async function createBookCopy(formData: FormData) {
     'use server'
 
-    const baseUrl = process.env.BASE_URL
+    const baseUrl = process.env.BASE_URL;
+    const str = formData.get('due_date') as string;
+    const dueDate = str ? new Date(str) : null; 
 
     const payload = {
-      book_id: parseInt(formData.get('book_id') as string),
+      bookId: parseInt(formData.get('book_id') as string),
       imprint: formData.get('imprint'),
-      due_date: new Date(formData.get('due_date') as string),
-      status: parseInt(formData.get('status') as string)
+      dueBack: dueDate,
+      status: parseInt(formData.get('status') as string),
+      isbn: formData.get('isbn')
     }
     console.log('pyload:', payload)
 
-    const resp = await fetch(`${baseUrl}/api/copies`, {
+    const resp = await fetch(`${baseUrl}/copies`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -50,9 +53,12 @@ export default async function BookCopyForm() {
           <input type="text" name="imprint" required />
 
           <BookCopyStatus />
+
+          <label className='sm:text-end'>ISBN:</label>
+          <input type="text" name="isbn" required />
           
           <label className='sm:text-end'>Due Date:</label>
-          <input type="date" name="due_date" required />
+          <input type="date" name="due_date" />
         </div>
         <div className='text-center'>
           <button type="submit" 
