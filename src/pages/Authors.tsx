@@ -30,7 +30,7 @@ export default function Authors() {
           {authors && authors.map((author: AuthorType) => (
             <li key={author.id}>
               <Link to={`/authors/${author.id}`} className="hover:text-blue-500">
-                <span>{author.firstName}{' '}{author.familyName}</span>
+                <span>{author.first_name}{' '}{author.family_name}</span>
               </Link>
             </li>
           ))}
