@@ -84,21 +84,16 @@ export default function Home() {
   ]
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-8 px-4">
+    <div className="bg-gradient-to-br from-slate-50 to-blue-50 py-12 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <div className="flex justify-center items-center mb-6">
-            <div className="bg-gradient-to-r from-teal-500 to-blue-600 p-4 rounded-full shadow-lg">
-              <img src="/library.png" alt="Library" className="h-16 w-16" />
-            </div>
-          </div>
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent mb-4">
-            Local Library
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent mb-4">
+            Welcome to Your Library
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Welcome to your digital library management system. Explore our collection, 
-            manage books, and discover new literary adventures.
+            Explore our collection, manage books, and discover new literary adventures 
+            with our comprehensive library management system.
           </p>
         </div>
 

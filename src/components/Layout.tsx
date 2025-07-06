@@ -8,9 +8,11 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="container mx-auto min-h-screen">
+    <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
-      <main>{children}</main>
+      <main className="flex-1">
+        {children}
+      </main>
       <Footer />
     </div>
   )

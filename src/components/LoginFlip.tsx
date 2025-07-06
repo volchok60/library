@@ -17,26 +17,26 @@ export default function LoginFlip() {
 
   if (username) {
     return (
-      <>
-        <span className="px-4">{username}</span>
+      <div className="flex items-center space-x-4">
+        <span className="text-gray-700 text-sm font-medium">
+          Welcome, {username}
+        </span>
         <button 
           onClick={handleLogout} 
-          className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 sm:mt-0"
+          className="bg-gradient-to-r from-teal-500 to-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-teal-600 hover:to-blue-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
         >
           Logout
         </button>
-      </>
+      </div>
     )
   }
   
   return (
-    <div>
-      <Link 
-        to="/login" 
-        className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 sm:mt-0"
-      >
-        Login
-      </Link>
-    </div>
+    <Link 
+      to="/login" 
+      className="bg-gradient-to-r from-teal-500 to-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-teal-600 hover:to-blue-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
+    >
+      Login
+    </Link>
   )
 }
