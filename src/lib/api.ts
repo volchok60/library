@@ -1,4 +1,4 @@
-const baseUrl = import.meta.env.VITE_BASE_URL || 'http://localhost:8000'
+const baseUrl = import.meta.env.VITE_BASE_URL || 'https://localhost:8000'
 
 export async function authorsCount() {
   const resp = await fetch(`${baseUrl}/authors`, {
