@@ -26,7 +26,7 @@ export default function CopyDetails() {
 
   if (!bookCopy) return <div>Loading...</div>
 
-  const dueDate = bookCopy.dueBack?.split('T')[0]
+  const dueDate = bookCopy.due_back?.split('T')[0]
   const book = bookCopy.book
   const author = book.author
   const statuses = getBookCopyStatuses()
@@ -40,7 +40,7 @@ export default function CopyDetails() {
       </p>
       <p>
         <span>Author: </span>
-        {author.firstName}{' '}{author.familyName}
+        {author.first_name}{' '}{author.family_name}
       </p>
       <p>
         <span>Imprint: </span>

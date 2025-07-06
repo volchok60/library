@@ -19,11 +19,11 @@ export default function AuthorEdit() {
         try {
           const author = await getAuthor(parseInt(id))
           setFormData({
-            firstName: author.firstName,
-            familyName: author.familyName,
-            birthDate: author.birthDate.split('T')[0],
-            deathDate: author.deathDate?.split('T')[0] || '',
-            lifeSpan: author.lifeSpan
+            firstName: author.first_name,
+            familyName: author.family_name,
+            birthDate: author.birth_date?.split('T')[0] || '',
+            deathDate: author.death_date?.split('T')[0] || '',
+            lifeSpan: author.life_span
           })
         } catch (error) {
           console.error('Failed to fetch author:', error)

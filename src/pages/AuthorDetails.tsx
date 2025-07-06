@@ -25,8 +25,8 @@ export default function AuthorDetails() {
 
   if (!author) return <div>Loading...</div>
 
-  const birthDate = author.birthDate.split('T')[0]
-  const deathDate = author.deathDate?.split("T")[0]
+  const birthDate = author.birth_date?.split('T')[0]
+  const deathDate = author.death_date?.split("T")[0]
 
   return (
     <>
@@ -34,7 +34,7 @@ export default function AuthorDetails() {
       <div>
         <p className="mb-2">
           <span className="underline">
-            {author.firstName}{' '}{author.familyName}
+            {author.first_name}{' '}{author.family_name}
           </span>
           <span> ( </span>
           <FormattedDate dateString={birthDate} />
@@ -43,7 +43,7 @@ export default function AuthorDetails() {
           <span> ) </span>
         </p>
         <p>
-          {author.lifeSpan}
+          {author.life_span}
         </p>
       </div>
       <div className='text-center'>

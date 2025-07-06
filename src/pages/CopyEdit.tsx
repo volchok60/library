@@ -55,7 +55,7 @@ export default function CopyEdit() {
 
   if (!bookCopy) return <div>Loading...</div>
 
-  const dueDate = bookCopy.dueBack?.split('T')[0]
+  const dueDate = bookCopy.due_back?.split('T')[0]
 
   return (
     <div>
