@@ -2,15 +2,23 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export default function LoginFlip() {
     const router = useRouter();
+    const [username, setUsername] = useState<string | null>(null);
+
+    useEffect(() => {
+        setUsername(localStorage.getItem("username"));
+    }, []);
+
     function handleLogout() {
         localStorage.removeItem("username");
+        setUsername(null);
         router.push('/');
         router.refresh();
     }
-    const username = localStorage.getItem("username");
+
     if (username) {
         return (
             <>
